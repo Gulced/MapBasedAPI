@@ -3,6 +3,14 @@
   <ItemGroup>
     <ProjectReference Include="..\MapBasedAPI.Domain\MapBasedAPI.Domain.csproj" />
     <ProjectReference Include="..\MapBasedAPI.Common\MapBasedAPI.Common.csproj" />
+    <ProjectReference Include="..\MapBasedAPI.Persistence\MapBasedAPI.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="NetTopologySuite" Version="2.6.0" />
   </ItemGroup>
 
   <PropertyGroup>
