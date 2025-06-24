@@ -1,6 +1,6 @@
 using MapBasedAPI.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 namespace MapBasedAPI.Persistence.Contexts
 {
@@ -13,12 +13,14 @@ namespace MapBasedAPI.Persistence.Contexts
         public DbSet<MapPoint> MapPoints { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+{
+    base.OnModelCreating(modelBuilder);
 
-            // Eğer gerekirse özel konfigürasyonlar burada yapılabilir
-            // Örneğin:
-            // modelBuilder.Entity<MapPoint>().Property(m => m.Location).HasSrid(4326);
-        }
+    modelBuilder.Entity<MapPoint>()
+        .Property(m => m.Location)
+        .HasColumnType("geometry");
+}
+
     }
 }
+

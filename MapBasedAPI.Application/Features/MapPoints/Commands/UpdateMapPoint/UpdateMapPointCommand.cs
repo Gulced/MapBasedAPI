@@ -1,10 +1,11 @@
 using MediatR;
-using NetTopologySuite.Geometries;
 
 namespace MapBasedAPI.Application.Features.MapPoints.Commands
+
 {
-    public class AddMapPointCommand : IRequest<int>
+    public class UpdateMapPointCommand : IRequest<bool>
     {
+        public int Id { get; set; } // Güncellenecek MapPoint ID'si
         public string Title { get; set; } = string.Empty;
         public string? Description { get; set; }
         public double Latitude { get; set; }

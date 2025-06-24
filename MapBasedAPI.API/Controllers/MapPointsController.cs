@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MapBasedAPI.Application.Features.MapPoints.Commands.AddMapPoint;
-using MapBasedAPI.Application.Features.MapPoints.Queries.GetAllMapPoints;
+using MapBasedAPI.Application.Features.MapPoints.Commands; // Add, Update, Delete hepsi buradan gelir
+using MapBasedAPI.Application.Features.MapPoints.Queries;  // GetAllQuery buradan
 
 namespace MapBasedAPI.API.Controllers
 {
@@ -28,6 +28,27 @@ namespace MapBasedAPI.API.Controllers
         {
             var result = await _myMediator.Send(new GetAllMapPointsQuery());
             return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateMapPointCommand command)
+        {
+            if (id != command.Id)
+                return BadRequest("Id in route and body do not match");
+
+            await _myMediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _myMediator.Send(new DeleteMapPointCommand { Id = id });
+
+            if (!result)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }
